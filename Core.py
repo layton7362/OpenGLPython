@@ -5,13 +5,21 @@ from typing import List
 import glm
 import Util
 
+class MeshData(enumerate):
+    VERTEX = 0
+    NORMAL = 1
+    COLOR = 2
+    UV1 = 3
+    UV2 = 4
+    INDEX = 5
+
+
 class Base():
     def __init__(self) -> None:
         pass
     
     def dispose():
         pass
-        
 
 class Node(Base):
     
@@ -49,7 +57,7 @@ class Resource(Base):
 
 class Base_Material(Resource):
     pass
-    
+
 class Base_Mesh(Resource):
     def __init__(self, verts, normals = None, indices = None, colors = None) -> None:
         super().__init__()
@@ -135,3 +143,5 @@ class Base_Mesh(Resource):
 
 class Base_SceneTree(Base):
     pass
+
+

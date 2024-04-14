@@ -11,7 +11,7 @@ class Mesh(Base_Mesh):
 
 class Cube(Mesh):
     def __init__(self, size=1.0, color=(1.0, 1.0, 1.0)) -> None:
-        verts = [
+        vertices = [
         # Vorderseite
         -size, -size, size,
         size, -size, size,
@@ -44,8 +44,19 @@ class Cube(Mesh):
         -size, -size, size,
         ]
 
- 
+        super().__init__(vertices, None, None, None)
+    
+    
 
-        super().__init__(verts, None, None, None)
+class Triangle2D(Mesh):
+    def __init__(self, size=1.0, color=(1.0, 1.0, 1.0)) -> None:
+
+        vertices = [
+            -0.5, -0.5, 0.0,
+            0.5, -0.5, 0.0,
+            0.0,  1, 0.0
+        ]
+
+        super().__init__(vertices, None, None, None)
     
     
