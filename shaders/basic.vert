@@ -1,7 +1,11 @@
 #version 330 core
 layout (location = 0) in vec3 aPos;
 
+uniform float time = 0;
+uniform mat4 matrix;
+
 void main()
-{
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+{   
+    vec4 res =  vec4(aPos, 1) * matrix ;
+    gl_Position = res;
 }

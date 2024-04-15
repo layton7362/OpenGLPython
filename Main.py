@@ -5,11 +5,12 @@ from Window import GameWindow
 import Input
 import SceneTree
 import time
+from RenderEngine import RenderType, Renderer
 
 ## PROGRAM START
 
 tree: SceneTree.SceneTree = None
-
+    
 def init():
     global tree
     
@@ -17,10 +18,6 @@ def init():
     
     tree = SceneTree.SceneTree()
 
-# TODO REMOVE
-    import Scene_Test
-    Scene_Test.scene_init(tree)    
-    
 def main_loop():
     global tree
 
@@ -42,7 +39,7 @@ def main_loop():
         
         if loop_time >= FRAME_TIME:
             # Delta-Zeit berechnen
-            delta = loop_time
+            tree.delta = loop_time
             
             # Aktualisiere die aktuelle Zeit
             time_current = time.time()
