@@ -12,4 +12,7 @@ class SceneTree(Core.Base_SceneTree):
     def render(self):
         for renderObject in self.renderObjects:
             self.renderer.render(renderObject, RenderType.TRIANGLES)
-            
+    
+    def dispose_object(self, object: Core.Object3D):
+        self.renderer.delete_mesh(object)
+        

@@ -18,6 +18,9 @@ def init():
     
     tree = SceneTree.SceneTree()
 
+def dispose():
+    tree.dispose()
+
 def main_loop():
     global tree
 
@@ -71,8 +74,9 @@ def main_loop():
             # excess_time = time.time() - time_current
             # if excess_time < FRAME_TIME:
             #     time.sleep(FRAME_TIME - excess_time)
-
     
+    dispose()
+        
 
 if __name__ == "__main__":
     init()

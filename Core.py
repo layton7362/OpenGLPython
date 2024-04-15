@@ -9,23 +9,8 @@ from math import sin
 import glfw
 import Util
 from enum import Enum
+from Const import * 
 
-
-
-class MeshData(Enum):
-    VERTEX = 0
-    NORMAL = 1
-    COLOR = 2
-    UV1 = 3
-    UV2 = 4
-    INDEX = 5
-
-class ShaderData(Enum):
-    VERTEX = 0
-    FRAGMENT = 1
-    TESSELATION = 2
-    GEOMETRY = 3
-    COMPUTE = 4
 
 class Base():
     def __init__(self) -> None:
@@ -271,10 +256,18 @@ class Base_SceneTree(Base):
         self.deferred_calls.clear()
         
     def scene_dispose(self):
-        self.scene.dispose(self)
+        self.scene.dispose()
+        for object in self.renderObjects:
+            self.dispose_object(object)
 
     def render(self):
         pass
+    
+    def dispose_object(self, object: Object3D):
+        pass
+    
+    def dispose(self):
+        self.scene_dispose()
     
 class GameScene(Base):
     

@@ -8,10 +8,18 @@ class RenderType(Enum):
     TRIANGLE_FAN = GL_TRIANGLE_FAN,
     TRIANGLES = GL_TRIANGLES
 
+
+class RenderData:
+    def __init__(self, VAO, VBO, EBO, PROG = None, TEX = None) -> None:
+        self.VAO = VAO
+        self.VBO = VBO
+        self.EBO = EBO
+        self.PROG = PROG
+        self.TEX = TEX
+
 class Renderer:
-        
     def __init__(self) -> None:
-        self._render_ids: map[Object3D, id] = {}
+        self._render_ids: map[Object3D, RenderData] = {}
 
     def get_render_id(self, object: Object3D) -> int:
         if object in self._render_ids:
@@ -37,16 +45,17 @@ class Renderer:
         glEnableVertexAttribArray(0)    
         glBindBuffer(GL_ARRAY_BUFFER, 0) 
         
-        self._render_ids[object] = VAO
+        self._render_ids[object] = RenderData(VAO, VBO, None)
     
     def delete_mesh(self, object: Object3D):
-        # TODO
-        pass
+        data = self._render_ids[object]
+        glDeleteVertexArrays(1, [data.VAO])
+        glDeleteBuffers(1, [data.VBO])
+        # glDeleteProgram(object.material.program);
     
     def render_begin():
         glClearColor(0.2, 0.3, 0.3, 1.0)
         glClear(GL_COLOR_BUFFER_BIT)
-    
     
     def render(self, object: Object3D, type: RenderType):
         
@@ -54,7 +63,7 @@ class Renderer:
             WARNING("Object has no renderId: " + object )
             return -1
         
-        VAO: int =  self._render_ids[object]
+        VAO: int =  self._render_ids[object].VAO
         mesh: Base_Mesh = object.mesh
         count = mesh.get_vertices_count()
         mesh.material.use()
